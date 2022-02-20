@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+  <div class="columns is-vcentered">
+    <div class="column is-12">
+      <h1>Availabity Chart: {{ name }}</h1>
+    </div>
+  </div>
+  <div class="columns is-vcentered">
+    <div class="column is-12">
+      <div style="overflow: hidden" class="visavail" id="visavail_container">
+        <p id="visavail_graph">
+          <!-- Visavail.js chart will be placed here -->
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var dataset = {{ data|safe }}
+  var options = {
+    id_div_container: "visavail_container",
+    id_div_graph: "visavail_graph",
+  };
+
+  var chart = visavail.generate(options, dataset);
+</script>
+<!-- <script>
+  console.log('{{ data }}')
+  console.log(JSON.parse("{{ data|escapejs }}"))
+  console.log('{{ data|escapejs }}')
+  console.log('{{ data|safe }}')
+</script> -->
+
+{% endblock %}
